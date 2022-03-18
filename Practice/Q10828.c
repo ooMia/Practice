@@ -1,62 +1,131 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <string.h>
 
-// 전체 input문자열을 저장하는 char 배열
-char data[0x5000][0x10] = { 0, };
+int stack[10001], sp = -1;
 
-// 전체 input문자열을 저장하고 출력하기
-void test1()
-{
-    int N; scanf(" %d", &N);
-    for (int i = N; i > 0; --i) { scanf(" %s", data[i]); printf("%s\n", data[i]); }
-}
-
-
+void push(int X) { stack[++sp] = X; }
+int size() { return sp + 1; }
+int empty() { return (sp == -1); }
+int top() { return empty() ? -1 : stack[sp]; }
+int pop() { return empty() ? -1 : stack[sp--]; }
 
 int main()
 {
-    test1();
+    int argc, temp;
+    char argv[20];
+
+    scanf(" %d", &argc);
+
+    for (int i = argc; i > 0; --i)
+    {
+        scanf(" %s", argv);
+
+        switch (argv[0])
+        {
+        case 'p':
+            if (argv[1] == 'u') { scanf(" %d", &temp); push(temp); break; }
+            printf("%d\n", pop()); break;
+        case 's': printf("%d\n", size()); break;
+        case 'e': printf("%d\n", empty()); break;
+        case 't': printf("%d\n", top()); break;
+        default: break;
+        }
+    }
+    return 0;
 }
-
-
-
-
-
 
 
 
 /*
 
-void doOperation()
+// 하나씩 입력받고 하나씩 처리하기
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <assert.h>
+
+int stack[10000], stackPointer = -1;
+
+void push(int X) { stack[++stackPointer] = X; }
+int size()  { return stackPointer + 1; }
+int empty() { return (stackPointer == -1); }
+int top()   { return empty() ? -1 : stack[stackPointer]; }
+int pop()   { return empty() ? -1 : stack[stackPointer--]; }
+
+int main()
 {
-    scanf
+    int argc, temp;
+    char argv[20];
+
+    scanf(" %d", &argc);
+    assert(1 < argc && argc < 10000);
+
+    for (int i = argc; i > 0; --i)
+    {
+        scanf(" %s", argv);
+
+        switch (strcmp(argv, "push"))
+        {
+        case 00: scanf(" %d", &temp); assert(1 <= temp && temp <= 100000); push(temp); break;
+        case -1: printf("%d\n", !strcmp(argv, "pop") ? pop() : empty()); break;
+        case +1: printf("%d\n", !strcmp(argv, "size") ? size() : top()); break;
+        default: break;
+        }
+
+        assert(stackPointer >= -1);
+    }
+    return 0;
 }
-int getOperationNumber(char)
 
-enum Operation {    // 열거형 정의
-    push = 0, pop, size, empty, top
-};
-// 첫째 줄에 주어지는 명령의 수 N(1 ≤ N ≤ 10, 000)이 주어진다.
-// 둘째 줄부터 N개의 줄에는 명령이 하나씩 주어진다.
-// 주어지는 정수는 1보다 크거나 같고, 100000보다 작거나 같다.
-// 문제에 나와있지 않은 명령이 주어지는 경우는 없다.
+*/
 
 
-// push X: 정수 X를 스택에 넣는 연산
-void push(int X) {}
 
-// pop : 스택 top의 정수를 빼고, 그 수를 출력한다. 스택 비어있으면 -1 출력
-int pop() {}
+/*
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// size : 스택에 들어있는 정수 개수
-int size() {}
+int stack[0x3000] = { -1, };
+int stackPointer = -1;
 
-// empty : 스택이 비어있으면 1, 아니면 0을 출력한다.
-int empty() {}
+void push(int X) { stack[++stackPointer] = X; }
+int size() { return stackPointer + 1; }
+int empty() { return (stackPointer == -1); }
+int top() { return empty() ? -1 : stack[stackPointer]; }
+int pop() { return empty() ? -1 : stack[stackPointer--]; }
 
-// top : 스택의 가장 위에 있는 정수를 출력. 스택 비어있으면 -1 출력
-int top() {} 
+int argc;
+char argv[20000][8];
 
+int main()
+{
+    scanf(" %d", &argc);
 
+    int n = 0;
+    while (1)
+        if (scanf(" %s", argv[n++]) == EOF)
+            break;
+
+    for (int i = 0; i < n-1; ++i)
+    {
+        switch (strcmp(argv[i], "push"))
+        {
+        case 00:
+            push(atoi(argv[++i]));
+            break;
+        case -1:
+            printf("%d\n", !strcmp(argv[i], "pop") ? pop() : empty());
+            break;
+        case +1:
+            printf("%d\n", !strcmp(argv[i], "size") ? size() : top());
+            break;
+        default:
+            break;
+        }
+    }
+
+    return 0;
+}
 */

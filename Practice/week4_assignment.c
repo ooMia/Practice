@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+/*#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
 int N;
@@ -27,3 +27,4 @@ void printResult()
 {
 	printf("min:%d max:%d", *min, *max);
 }
+*/

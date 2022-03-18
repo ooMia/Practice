@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="week4_assignment.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
